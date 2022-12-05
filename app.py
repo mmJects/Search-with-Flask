@@ -7,9 +7,16 @@ db = SQL("mysql://root:YES@localhost:3306/cs50")
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    # we will change the template , which can interact with user's inputs
+    return render_template("api_index.html")
+    # return render_template("index.html")
 
 @app.route("/search")
 def search():
-    books = db.execute("select * from book_list where title like ?","%"+ request.args.get("q") +"%")
+    # as we will use API , we need to add condition to check whether user has typed something or not
+    q = request.args.get("q")
+    if q:   # if there is search 
+        books = db.execute("select * from book_list where title like ?","%"+ q +"%")
+    else:
+        books = []
     return render_template("search.html",books = books)
