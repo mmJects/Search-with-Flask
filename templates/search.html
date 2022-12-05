@@ -1,15 +1,14 @@
-{% extends "layout.html" %}
 
-{% block body %}
-
-    <ul>
         {% if books != [] %}
             {% for book in books %}
             <li> {{book["title"]}} </li>
             {% endfor %}
         {% else %}
-            <h2> Sorry! No book title . <a href="/">Try with another...</a></h2>
+        <!-- Since we will use API , notification will be in the same page . so delete the link-->
+            <!-- <h2> Sorry! No book title . <a href="/">Try with another...</a></h2> -->
+            <h2> Sorry! No book title . Try with another...</a></h2>
         {% endif %}
-    </ul>
 
-{% endblock %}
+
+<!-- since we will use API , we don't need search.html for user. We will interact the search results 
+    in the api_index.html. So , we don't need to extends this html.We will delete the some jinja extends methods-->
