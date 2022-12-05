@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>API searh page</title>
+        <meta name="viewport" content="width:device-width,initial-scale:1.0">
+    </head>
+    <body>
+        <input autocomplete="off" autofocus placeholder="Search" type="search">
+        <ul></ul>
+
+        <script type="text/javascript">
+            let inp = document.querySelector("input")
+            inp.addEventListener("input",async function(){
+                let response = await fetch("/search?q="+inp.value);
+                let books = await response.text()
+                document.querySelector('ul').innerHTML = books
+            })
+        </script>
+    </body>
+</html>
