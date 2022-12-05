@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <ul>
+        {% if books != [] %}
+            {% for book in books %}
+            <li> {{book["title"]}} </li>
+            {% endfor %}
+        {% else %}
+            <h2> Sorry! No book title . <a href="/">Try with another...</a></h2>
+        {% endif %}
+    </ul>
+
+{% endblock %}
