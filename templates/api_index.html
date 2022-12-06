@@ -9,11 +9,23 @@
         <ul></ul>
 
         <script type="text/javascript">
+        // if we use li tags , getting data for the user is not good
+        // if they use our datas , <li> tags wil be included in that datas 
+        // so we need to use JSON which is standard format
             let inp = document.querySelector("input")
             inp.addEventListener("input",async function(){
                 let response = await fetch("/search?q="+inp.value);
-                let books = await response.text()
-                document.querySelector('ul').innerHTML = books
+                // getting the results with json format
+                let books = await response.json()
+                // initializing the text which will be added with the results
+                let html = ''
+                for (let id in books){  // loop through the each book
+                    // getting the tile of each book with slightly chalnges
+                    let title = books[id].title.replace('<','&lt;').replace('&','&amp;')
+                    html += '<li>' + title + '</li>'
+                }
+                document.querySelector("ul").innerHTML = html;
+                // document.querySelector('ul').innerHTML = books
             })
         </script>
     </body>

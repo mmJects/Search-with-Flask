@@ -1,4 +1,4 @@
-from flask import render_template,request,Flask
+from flask import render_template,request,Flask,jsonify # as we will use json format
 from cs50 import SQL
 
 app = Flask(__name__)
@@ -19,4 +19,7 @@ def search():
         books = db.execute("select * from book_list where title like ?","%"+ q +"%")
     else:
         books = []
-    return render_template("search.html",books = books)
+    return jsonify(books)       
+    # we will return the books list with json format
+    # return render_template("search.html",books = books)
+    # search.html will not be used for json format as we can return the data with json
